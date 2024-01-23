@@ -1,7 +1,10 @@
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot("2132151577:AAGRlXdWag2rCbZdeT5puz9YKKx4Bz0NUpE")
+
+from env import TOKEN
+
+bot = telebot.TeleBot({TOKEN})
 admin = 1110147997
 print('Запустился')
 
@@ -20,17 +23,17 @@ def send_welcome(message):
 @bot.message_handler(commands=['help'])
 def send_welcome(message):
     bot.reply_to(message, "Данный бот предназначен для оставления резюме <<Боссу>>.\n "
-                          "Для того что бы войти в главное меню нажми /start\n"
-                          "Для того что бы начать проходить собеседование нажми /go")
+                        "Для того что бы войти в главное меню нажми /start\n"
+                        "Для того что бы начать проходить собеседование нажми /go")
 
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
     if message.text == 'Привет':
         bot.reply_to(message, "Привет, я HR-It бот, если ты готов пройти собеседование, напиши /go\n"
-                              "Справка - /help")
+                            "Справка - /help")
     elif message.text == 'Hi':
         bot.reply_to(message, "Hi, I`am HR-It bot and if you ready start - write /go\n"
-                              "For help - /help")
+                            "For help - /help")
     elif message.text == '/go':
         bot.send_message(message.from_user.id, "Отлично.\nНачнем:\n (6/1) - Ваше имя?")
         bot.register_next_step_handler(message, reg_name)
